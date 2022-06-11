@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.MicrosoftWord</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>Microsoft Word</string>
+            <key>LANGUAGE</key>
+            <string>en-US</string>
+            <key>LOCALE</key>
+            <string>en-US</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Office</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>Microsoft Word or MS Word (often called Word) is a graphical word processing program that users can type with.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>Microsoft</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>%NAME%</string>
+            <key>NAME</key>
+            <string>MicrosoftWord</string>
+            <key>downloadurl</key>
+            <string>https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+            </dict>
+            <key>productid</key>
+            <string>525134</string>
+            <key>softwaretitle</key>
+            <string>Word</string>
+            <key>vendor</key>
+            <string>Microsoft</string>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>com.github.rtrouton.munki.microsoftword365</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict />
+            <key>parent_recipes</key>
+            <dict>
+                <key>com.github.rtrouton.download.microsoftword365</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>8a29db2944790f4a29cc98618e0d2e87c96668d5</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.rtrouton-recipes/MicrosoftWord365/MicrosoftWord365.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>447da48064a925c65307413ae32c76a665d633f0ccf9ad7f53d0de1809441c1c</string>
+                </dict>
+                <key>com.github.rtrouton.munki.microsoftword365</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>655a1301c8ba6fe33421da051f4a02f10895c9f2</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.rtrouton-recipes/MicrosoftWord365/MicrosoftWord365.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>e4592dfa071f2c5b4cc973332c7fd328002a8951b89ae3dc201cfb88dd018d1d</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

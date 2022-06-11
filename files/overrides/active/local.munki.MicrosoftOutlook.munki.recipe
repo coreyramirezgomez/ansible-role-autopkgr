@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.MicrosoftOutlook</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>Microsoft Outlook</string>
+            <key>LANGUAGE</key>
+            <string>en-US</string>
+            <key>LOCALE</key>
+            <string>en-US</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Office</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>Microsoft Outlook is a personal information manager software system from Microsoft, available as a part of the Microsoft Office suite.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>Microsoft</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>%NAME%</string>
+            <key>NAME</key>
+            <string>MicrosoftOutlook</string>
+            <key>downloadurl</key>
+            <string>https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+            </dict>
+            <key>productid</key>
+            <string>525137</string>
+            <key>softwaretitle</key>
+            <string>Outlook</string>
+            <key>vendor</key>
+            <string>Microsoft</string>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>com.github.rtrouton.munki.microsoftoutlook365</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict />
+            <key>parent_recipes</key>
+            <dict>
+                <key>com.github.rtrouton.download.microsoftoutlook365</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>8a29db2944790f4a29cc98618e0d2e87c96668d5</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.rtrouton-recipes/MicrosoftOutlook365/MicrosoftOutlook365.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>49e6bee5ce8bd6216d6141d33952dff41d3e5e87abcc774ceb6f60ae0e91262f</string>
+                </dict>
+                <key>com.github.rtrouton.munki.microsoftoutlook365</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>2a9c1de9795ecd3d9f9904855e34f11eee0fb6b6</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.rtrouton-recipes/MicrosoftOutlook365/MicrosoftOutlook365.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>854aaa6ed6b578c32f0e646df6b99727c624e912ea2f2c47a589f4cd80e446b7</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

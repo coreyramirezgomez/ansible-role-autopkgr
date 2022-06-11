@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.JumpCloudAgent</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>JumpCloud Agent</string>
+            <key>LANGUAGE</key>
+            <string>en-US</string>
+            <key>LOCALE</key>
+            <string>en-US</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Administration</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>A fully managed directory to rule your infrastructure whether on-premise or in the cloud. JumpCloud is your central source to authenticate, authorize, and manage employees, their devices and IT applications.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>JumpCloud</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>%NAME%</string>
+            <key>NAME</key>
+            <string>JumpCloudAgent</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>preinstall_script</key>
+                <string>
+                    #!/bin/sh # # Adapted from:https://support.JumpCloud.com/customer/portal/articles/2389320-agent-deployment-via-command-line # connectKey=b38e421b00f9284c5d58ec089a03a21c663492cb if [ -z "${connectKey}" ] then /bin/echo "No connect key defined...
+                    exiting..." exit 1 else /bin/mkdir -p /opt/jc /bin/cat &lt;&lt;-EOF &gt; /opt/jc/agentBootstrap.json { "publicKickstartUrl": "https://kickstart.jumpcloud.com:443", "privateKickstartUrl": "https://private-kickstart.jumpcloud.com:443", "connectKey":
+                    "${connectKey}" } EOF fi
+                </string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+                <key>uninstall_method</key>
+                <string>uninstall_script</string>
+                <key>uninstall_script</key>
+                <string>
+                    #!/bin/bash /usr/bin/curl https://github.com/TheJumpCloud/support/releases/download/mac_agent_uninstaller/remove_mac_agent.sh -o /tmp/remove_mac_agent.sh /bin/bash /tmp/remove_mac_agent.sh rm -fv /tmp/remove_mac_agent.sh
+                </string>
+            </dict>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>com.github.dataJAR-recipes.munki.JumpCloud Agent</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict>
+                <key>com.github.dataJAR-recipes.Shared Processors/DistributionPkgInfo</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>a1f761ab9eea8906056606d18cdadfb439b3dced</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.dataJAR-recipes/Shared Processors/DistributionPkgInfo.py</string>
+                    <key>sha256_hash</key>
+                    <string>162aa88295c735e1667b6290478ed7d8b2863441dfb0596dd4c4a421d82a4926</string>
+                </dict>
+            </dict>
+            <key>parent_recipes</key>
+            <dict>
+                <key>com.github.dataJAR-recipes.download.JumpCloud Agent</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>69ca31eedd7cc918b9f5971f3351b29118add0b8</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.dataJAR-recipes/JumpCloud Agent/JumpCloud Agent.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>8448cb44faa1cd2c9a888d57ebc6b3daee37c33add9e8cb84df2c3501a2e6aa9</string>
+                </dict>
+                <key>com.github.dataJAR-recipes.munki.JumpCloud Agent</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>5c73b6ec79ef4503923b3aff7a61db4079215e9b</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.dataJAR-recipes/JumpCloud Agent/JumpCloud Agent.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>61e9f65be528c1657ba2f766352e8503c600b310dfc6f815a731972569dfa200</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

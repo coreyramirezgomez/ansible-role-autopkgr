@@ -1,0 +1,33 @@
+<div class="sidebar">
+    <div class="chart titled-box quick-links">
+        <h2>{{ autopkgr_client_resources_sidebar.title }}</h2>
+        <div class="content">
+            <ol class="list">
+{% if autopkgr_client_resources_sidebar.category_selector %}
+                <li class="popup">
+                    <div class="select links">
+                        <label>
+                            <span></span>
+                            <select id="category-selector" onchange="category_select()">
+                                ${category_items}
+                            </select>
+                        </label>
+                    </div>
+                </li>
+{% endif %}
+{% for link in autopkgr_client_resources_sidebar.links %}
+{% if link.class == "separator" %}
+                <li class="separator"><hr/></li>
+{% elif link.class == "link" %}
+                <li class="link"><a
+                    href="{{ link.href }}"
+{% if link.target is defined %}
+                    target="{{ link.target }}"
+{% endif %}
+                    >{{ link.title }}</a></li>
+{% endif %}
+{% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>

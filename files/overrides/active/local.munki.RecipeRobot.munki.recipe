@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.RecipeRobot</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>Recipe Robot</string>
+            <key>LANGUAGE</key>
+            <string>en-US</string>
+            <key>LOCALE</key>
+            <string>en-US</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Administration</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>A kick ass tool for creating AutoPkg recipes.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>Elliot Jordan</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>%NAME%</string>
+            <key>NAME</key>
+            <string>RecipeRobot</string>
+            <key>github_repo</key>
+            <string>homebysix/recipe-robot</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+            </dict>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>com.github.homebysix.munki.RecipeRobot</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict />
+            <key>parent_recipes</key>
+            <dict>
+                <key>com.github.homebysix.download.RecipeRobot</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>665186b0a88649dbd1d4fb42fbcf649acdd25c50</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.homebysix-recipes/ElliotJordan/Recipe Robot.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>cacd7651b98fe1d677212677236ecd7c4d5bf9ca3b990454d95a3b6ed18d9cdc</string>
+                </dict>
+                <key>com.github.homebysix.munki.RecipeRobot</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>665186b0a88649dbd1d4fb42fbcf649acdd25c50</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.homebysix-recipes/ElliotJordan/Recipe Robot.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>021dfd251ddb659e83c836636d284ecaf2697b9542ec607e57aa5054b7fedbd5</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

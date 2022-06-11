@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Identifier</key>
+	<string>local.munki.ThinLincClient</string>
+	<key>Input</key>
+	<dict>
+		<key>DISPLAY_NAME</key>
+		<string>ThinLinc Client</string>
+		<key>DOWNLOAD_URL</key>
+		<string>%SITE_URL%/thinlinc/download</string>
+		<key>MUNKI_CATEGORY</key>
+		<string>Utilities</string>
+		<key>MUNKI_DESCRIPTION</key>
+		<string>A Linux remote desktop server built on open source technology.</string>
+		<key>MUNKI_DEVELOPER</key>
+		<string>Cendio AB</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>%NAME%</string>
+		<key>NAME</key>
+		<string>ThinLincClient</string>
+		<key>SITE_URL</key>
+		<string>https://www.cendio.com</string>
+		<key>STOPPROCESSINGIF_PREDICATE</key>
+		<string>download_changed == FALSE</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>test</string>
+				<string>autopkg</string>
+			</array>
+			<key>category</key>
+			<string>%MUNKI_CATEGORY%</string>
+			<key>description</key>
+			<string>%MUNKI_DESCRIPTION%</string>
+			<key>developer</key>
+			<string>%MUNKI_DEVELOPER%</string>
+			<key>display_name</key>
+			<string>%DISPLAY_NAME%</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>unattended_uninstall</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>ParentRecipe</key>
+	<string>com.github.coreyramirezgomez.grahampugh.recipes.munki.ThinLincClient</string>
+	<key>ParentRecipeTrustInfo</key>
+	<dict>
+		<key>non_core_processors</key>
+		<dict/>
+		<key>parent_recipes</key>
+		<dict>
+			<key>com.github.coreyramirezgomez.grahampugh.recipes.download.ThinLincClient</key>
+			<dict>
+				<key>path</key>
+				<string>~/Library/AutoPkg/RecipeRepos/com.github.coreyramirezgomez.grahampugh-recipes/ThinLincClient/ThinLincClient.download.recipe</string>
+				<key>sha256_hash</key>
+				<string>56b7e27ff2f65ff0c68c706c35703fb569934bd46e8aa64190ce3439d8898d20</string>
+			</dict>
+			<key>com.github.coreyramirezgomez.grahampugh.recipes.munki.ThinLincClient</key>
+			<dict>
+				<key>path</key>
+				<string>~/Library/AutoPkg/RecipeRepos/com.github.coreyramirezgomez.grahampugh-recipes/ThinLincClient/ThinLincClient.munki.recipe</string>
+				<key>sha256_hash</key>
+				<string>23621bc67fdee463dd7fff185543819979f7f76523abfbb90c57214bb0c4fa2d</string>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

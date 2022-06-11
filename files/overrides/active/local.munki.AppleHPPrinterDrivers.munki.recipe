@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.AppleHPPrinterDrivers</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>HP Printer Drivers</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Drivers</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>Provides the latest HP printing and scanning software for OS X.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>HP</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>Printer Drivers</string>
+            <key>NAME</key>
+            <string>AppleHPPrinterDrivers</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+            </dict>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>com.github.n8felton.munki.AppleHPPrinterDrivers</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict>
+                <key>com.github.n8felton.shared/AppleSupportDownloadInfoProvider</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>9142767e0cafb0c4f89de8c2b847354481fdb707</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.n8felton-recipes/SharedProcessors/AppleSupportDownloadInfoProvider.py</string>
+                    <key>sha256_hash</key>
+                    <string>de4a89d4db3e4744824181fbb3dc12ba20e581fb9ba2bc11a9af52c2b230deab</string>
+                </dict>
+            </dict>
+            <key>parent_recipes</key>
+            <dict>
+                <key>com.github.n8felton.download.AppleHPPrinterDrivers</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>ffce16cbbe20f46ca0e2f48e8541ac8ded6eeb2e</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.n8felton-recipes/ApplePrinterDrivers/AppleHPPrinterDrivers.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>f42258dfaf13186d6ad61e9992f4c8c16a9936d8a9b465308807a153a654b5c8</string>
+                </dict>
+                <key>com.github.n8felton.munki.AppleHPPrinterDrivers</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>6f54c8daa3e674ab615cffbba0630ba7617b3d94</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.n8felton-recipes/ApplePrinterDrivers/AppleHPPrinterDrivers.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>b6bd8b24557682f6378ca3fc5041185ae8c70b620bdc69c48659cd67dced28fc</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

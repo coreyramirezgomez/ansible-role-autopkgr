@@ -1,0 +1,75 @@
+---
+- name: autopkgr/tasks/configure - Ensure AutoPkg and Munki Directories Exist
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: "{{ autopkgr_user }}"
+  with_items:
+    - "{{ autopkgr_remote_base_path }}"
+    - "{{ autopkgr_recipe_override_dir }}"
+    - "{{ autopkgr_munki_repo }}"
+    - "{{ autopkgr_munki_repo }}/pkgs"
+    - "{{ autopkgr_munki_repo }}/pkgsinfo"
+    - "{{ autopkgr_munki_repo }}/catalogs"
+    - "{{ autopkgr_munki_repo }}/icons"
+    - "{{ autopkgr_munki_repo }}/client_resources"
+    - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}"
+    - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/templates"
+    - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/resources"
+- name: autopkgr/tasks/configure - Gather Post Processor Repos
+  set_fact:
+    autopkgr_recipe_repos: |-
+      {% set r = autopkgr_recipe_repos %}
+      {% if item.enabled is defined %}
+      {% if item.enabled %}
+      {% set r = r + [item.repo] %}
+      {% endif %}
+      {% endif %}
+      {{ r }}
+  with_items:
+    - "{{ autopkgr_post_processors }}"
+- name: autopkgr/tasks/configure - Build Post Processor Command
+  set_fact:
+    autopkgr_post_processor_commands: |
+      {% set r = autopkgr_post_processor_commands %}
+      {% if item.enabled is defined %}
+        {% if item.enabled %}
+          {% set r = r + ' --post ' + item.command %}
+        {% endif %}
+      {% endif %}
+      {{ r | trim | replace('\n', '') }}
+  with_items:
+    - "{{ autopkgr_post_processors }}"
+- name: autopkgr/tasks/configure - Apply Munki Configuration Keys
+  osx_defaults:
+    domain: com.googlecode.munki.munkiimport
+    key: "{{ item.name }}"
+    value: "{{ item.value }}"
+    type: "{{ item.type }}"
+    state: present
+  with_items:
+    - "{{ autopkgr_munki_configuration }}"
+- name: autopkgr/tasks/configure - Apply AutoPkg Configuration Keys
+  osx_defaults:
+    domain: com.github.autopkg
+    key: "{{ item.name }}"
+    value: "{{ item.value }}"
+    type: "{{ item.type }}"
+    state: present
+  with_items:
+    - "{{ autopkgr_autopkg_configuration }}"
+- name: autopkgr/tasks/configure - Add + Update Recipe Repos
+  command: "{{ autopkgr_bin_autopkg }} repo-add {{ item }}"
+  with_items:
+    - "{{ autopkgr_recipe_repos }}"
+- name: autopkgr/tasks/configure - Deploy Recipe Overrides
+  copy:
+    src: "overrides/active/{{ item }}"
+    dest: "{{ autopkgr_recipe_override_dir }}/"
+    owner: "{{ ansible_user_id }}"
+    mode: "0644"
+  with_items: "{{ autopkgr_override_files }}"
+- name: autopkgr/tasks/configure - update-trust-info for Recipe Overrides
+  command: "{{ autopkgr_bin_autopkg }} update-trust-info {{ autopkgr_recipe_override_dir }}/{{ item }}"
+  with_items: "{{ autopkgr_override_files }}"
+  when: "{{ autopkgr_update_trust_info }}"

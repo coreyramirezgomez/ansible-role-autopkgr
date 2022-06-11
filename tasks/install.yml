@@ -1,0 +1,16 @@
+---
+- name: autopkgr/tasks/install - Download Munki
+  include_tasks: "download.yml"
+  with_dict:
+    - "munki":
+        "github_url": "https://api.github.com/repos/munki/munki/releases"
+        "asset_filetype": ".pkg"
+        "release_version": "latest"
+    - "autopkgr":
+        "github_url": "https://api.github.com/repos/autopkg/autopkg/releases"
+        "asset_filetype": ".pkg"
+        "release_version": "latest"
+- name: autopkgr/tasks/install - Install Packages
+  command: "{{ autopkgr_bin_installer }} -pkg {{ item }} -target /"
+  become: true
+  with_items: "{{ downloads }}"

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.Atom</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>Atom</string>
+            <key>LANGUAGE</key>
+            <string>en-US</string>
+            <key>LOCALE</key>
+            <string>en-US</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Development</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>A hackable text editor for the 21st Century.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>GitHub, Inc.</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>%NAME%</string>
+            <key>NAME</key>
+            <string>Atom</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>postinstall_script</key>
+                <string>#!/bin/sh
+                    # Simulate the "Atom -&gt; Install Shell Commands"
+                    # /usr/local/bin/atom
+                    ATOM_SOURCE="/Applications/Atom.app/Contents/Resources/app/atom.sh"
+                    ATOM_TARGET="/usr/local/bin/atom"
+                    if [[ -f "${ATOM_SOURCE}" ]]; then
+                    echo "Creating symbolic link ${ATOM_SOURCE} -&gt; ${ATOM_TARGET}"
+                    /bin/ln -s "${ATOM_SOURCE}" "${ATOM_TARGET}"
+                    else
+                    echo "${ATOM_SOURCE} doesn't exist..."
+                    fi
+
+                    # /usr/local/bin/apm
+                    APM_SOURCE="/Applications/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm"
+                    APM_TARGET="/usr/local/bin/apm"
+                    if [[ -f "${APM_SOURCE}" ]]; then
+                    echo "Creating symbolic link ${APM_SOURCE} -&gt; ${APM_TARGET}"
+                    /bin/ln -s "${APM_SOURCE}" "${APM_TARGET}"
+                    else
+                    echo "${APM_SOURCE} doesn't exist..."
+                    fi
+
+                    exit 0
+                </string>
+                <key>postuninstall_script</key>
+                <string>#!/bin/sh
+                    # /usr/local/bin/atom
+                    ATOM="/usr/local/bin/atom"
+                    if [[ -L "${ATOM}" ]]; then
+                    echo "Removing ${ATOM}"
+                    /bin/rm -f "${ATOM}"
+                    else
+                    echo "${ATOM} doesn't exist..."
+                    fi
+
+                    # /usr/local/bin/apm
+                    APM="/usr/local/bin/apm"
+                    if [[ -L "${APM}" ]]; then
+                    echo "Removing ${APM}"
+                    /bin/rm -f "${APM}"
+                    else
+                    echo "${APM} doesn't exist..."
+                    fi
+
+                    exit 0
+                </string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+            </dict>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>io.github.hjuutilainen.munki.Atom</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict />
+            <key>parent_recipes</key>
+            <dict>
+                <key>io.github.hjuutilainen.download.Atom</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>32da6fa727ebcea5b835000d3ea4998d6b48cac2</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.hjuutilainen-recipes/GitHub/Atom.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>e750f36db1b2ef82d861b1cd6fab2b8d30d495d6386187a945264003a16c22aa</string>
+                </dict>
+                <key>io.github.hjuutilainen.munki.Atom</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>267933df1701ccaa49c45ce2b1c006b719bcaddd</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.hjuutilainen-recipes/GitHub/Atom.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>9742927ec51395d97a18b38b1af9ab98362b0b1140ff6ec2d2206786c4158dd1</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

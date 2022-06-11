@@ -1,0 +1,17 @@
+---
+## Do not modify unless you really know what you're doing.
+autopkgr_bin_makecatalogs: "/usr/local/munki/makecatalogs"
+autopkgr_bin_autopkg: "/usr/local/bin/autopkg"
+autopkgr_bin_iconimporter: "/usr/local/munki/iconimporter"
+autopkgr_bin_installer: "/usr/sbin/installer"
+autopkgr_post_processor_commands: ""
+autopkgr_builtin_autopkg_configuration:
+  - name: "FAIL_RECIPES_WITHOUT_TRUST_INFO"
+    type: "bool"
+    value: "{{ autopkgr_fail_recipes_without_trust | default('true', true) }}"
+  - name: "MUNKI_REPO"
+    type: "string"
+    value: "{{ autopkgr_munki_repo }}"
+  - name: "RECIPE_OVERRIDE_DIRS"
+    type: "string"
+    value: "{{ autopkgr_recipe_override_dir }}"

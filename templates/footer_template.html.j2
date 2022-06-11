@@ -1,0 +1,14 @@
+<div class="bottom-links">
+    <ul class="list" role="presentation">
+{% for footer in autopkgr_client_resources_footers %}
+        <li><a
+{% if footer.href is defined %}
+            href="{{ footer.href }}"
+{% endif %}
+{% if footer.target is defined %}
+            target="{{ footer.target }}"
+{% endif %}
+            >{{ footer.title }}</a></li>
+{% endfor %}
+    </ul>
+</div>

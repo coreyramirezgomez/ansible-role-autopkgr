@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Configures Munki settings</string>
+			<key>PayloadDisplayName</key>
+			<string>Munki</string>
+			<key>PayloadIdentifier</key>
+			<string>corp.kernel.munki</string>
+			<key>PayloadOrganization</key>
+			<string>HI LLC dba Kernel</string>
+			<key>PayloadType</key>
+			<string>ManagedInstalls</string>
+			<key>PayloadUUID</key>
+			<string>50D87C95-5F0C-4C9C-B5BB-1BA90F85E76D</string>
+            <key>AppleSoftwareUpdatesOnly</key>
+            <false/>
+            <key>AggressiveUpdateNotificationDays</key>
+            <integer>14</integer>
+            <key>InstallAppleSoftwareUpdates</key>
+            <false/>
+            <key>UnattendedAppleUpdates</key>
+            <true/>
+            <key>SoftwareRepoURL</key>
+            <string>http://munki.kernel.corp/repo</string>
+            <key>PackageURL</key>
+            <string>http://munki.kernel.corp/repo/pkgs</string>
+            <key>CatalogURL</key>
+            <string>http://munki.kernel.corp/repo/catalogs</string>
+            <key>ManifestURL</key>
+            <string>http://munki.kernel.corp/repo/manifests</string>
+            <key>IconURL</key>
+            <string>http://munki.kernel.corp/repo/icons</string>
+            <key>ClientResourceURL</key>
+            <string>http://munki.kernel.corp/repo/client_resources</string>
+            <key>ClientResourcesFilename</key>
+            <string>kernel_default.zip</string>
+            <key>ManagedInstallDir</key>
+            <string>/Library/Managed Installs</string>
+            <key>LogFile</key>
+            <string>/Library/Managed Installs/Logs/ManagedSoftwareUpdate.log</string>
+            <key>LogToSyslog</key>
+            <false/>
+            <key>LoggingLevel</key>
+            <integer>1</integer>
+            <key>DaysBetweenNotifications</key>
+            <integer>5</integer>
+            <key>UseNotificationCenterDays</key>
+            <integer>5</integer>
+            <key>SuppressUserNotification</key>
+            <false/>
+            <key>SuppressAutoInstall</key>
+            <false/>
+            <key>SuppressLoginwindowInstall</key>
+            <false/>
+            <key>SuppressStopButtonOnInstall</key>
+            <false/>
+            <key>InstallRequiresLogout</key>
+            <false/>
+            <key>FollowHTTPRedirects</key>
+            <string>https</string>
+            <key>PerformAuthRestarts</key>
+            <false/>
+            <key>ShowOptionalInstallsForHigherOSVersions</key>
+            <true/>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Munki Client Configuration</string>
+	<key>PayloadDisplayName</key>
+	<string>Munki</string>
+	<key>PayloadIdentifier</key>
+	<string>corp.kernel.munki</string>
+	<key>PayloadOrganization</key>
+	<string>HI LLC dba Kernel</string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>3C4AE1BF-485C-4CB0-B0ED-B403718D5352</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

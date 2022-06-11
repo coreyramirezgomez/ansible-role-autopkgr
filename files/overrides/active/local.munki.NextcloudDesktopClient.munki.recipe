@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.NextcloudDesktopClient</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>Nextcloud Desktop Client</string>
+            <key>LANGUAGE</key>
+            <string>en-US</string>
+            <key>LOCALE</key>
+            <string>en-US</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Office</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>A safe home for all your data. Access, share and protect your files, calendars, contacts, mail and more from any device, on your terms.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>Nextcloud GmbH</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>%NAME%</string>
+            <key>NAME</key>
+            <string>Nextcloud</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>blocking_applications</key>
+                <array>
+                    <string>nextcloud.app</string>
+                    <string>QtWebEngineProcess.app</string>
+                </array>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>minimum_os_version</key>
+                <string>10.10</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+            </dict>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>com.github.peterkelm.munki.nextcloud</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict />
+            <key>parent_recipes</key>
+            <dict>
+                <key>com.github.peterkelm.download.nextcloud</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>1f7ef37de1e24e10ffccd01268f457a102eb98af</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.peterkelm-recipes/Nextcloud/NextcloudDesktopClient.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>2f66d675f070eb03ddf310fb29836e36234a3a3f93c154e5088475a37fc24788</string>
+                </dict>
+                <key>com.github.peterkelm.munki.nextcloud</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>c38276894ae239c2053fd54e3e1a99a6603bc78a</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.peterkelm-recipes/Nextcloud/NextcloudDesktopClient.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>0cfa28ff3c6f2f04ef36328e0c116a7b18f4e34d9c45a8fb70032c1259ea8f33</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Identifier</key>
+        <string>local.munki.MicrosoftPowerpoint</string>
+        <key>Input</key>
+        <dict>
+            <key>DISPLAY_NAME</key>
+            <string>Microsoft PowerPoint</string>
+            <key>LANGUAGE</key>
+            <string>en-US</string>
+            <key>LOCALE</key>
+            <string>en-US</string>
+            <key>MUNKI_CATEGORY</key>
+            <string>Office</string>
+            <key>MUNKI_DESCRIPTION</key>
+            <string>Microsoft PowerPoint is a presentation software that enables users to create engaging presentations that consist of individual pages, or slides, which may contain text, graphics, sound, movies, hyperlinks, and other objects.</string>
+            <key>MUNKI_DEVELOPER</key>
+            <string>Microsoft</string>
+            <key>MUNKI_ICON</key>
+            <string></string>
+            <key>MUNKI_REPO_SUBDIR</key>
+            <string>%NAME%</string>
+            <key>NAME</key>
+            <string>MicrosoftPowerPoint</string>
+            <key>downloadurl</key>
+            <string>https://go.microsoft.com/fwlink/?linkid=%PRODUCTID%</string>
+            <key>pkginfo</key>
+            <dict>
+                <key>catalogs</key>
+                <array>
+                    <string>test</string>
+                    <string>autopkg</string>
+                </array>
+                <key>category</key>
+                <string>%MUNKI_CATEGORY%</string>
+                <key>description</key>
+                <string>%MUNKI_DESCRIPTION%</string>
+                <key>developer</key>
+                <string>%MUNKI_DEVELOPER%</string>
+                <key>display_name</key>
+                <string>%DISPLAY_NAME%</string>
+                <key>name</key>
+                <string>%NAME%</string>
+                <key>unattended_install</key>
+                <true />
+                <key>unattended_uninstall</key>
+                <true />
+            </dict>
+            <key>productid</key>
+            <string>525136</string>
+            <key>softwaretitle</key>
+            <string>PowerPoint</string>
+            <key>vendor</key>
+            <string>Microsoft</string>
+        </dict>
+        <key>ParentRecipe</key>
+        <string>com.github.rtrouton.munki.microsoftpowerpoint365</string>
+        <key>ParentRecipeTrustInfo</key>
+        <dict>
+            <key>non_core_processors</key>
+            <dict />
+            <key>parent_recipes</key>
+            <dict>
+                <key>com.github.rtrouton.download.microsoftpowerpoint365</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>8a29db2944790f4a29cc98618e0d2e87c96668d5</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.rtrouton-recipes/MicrosoftPowerPoint365/MicrosoftPowerPoint365.download.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>3648fd34d13d7cf7f363996357ea5776eecd40f6d6923fc015fc6132d6ea73f7</string>
+                </dict>
+                <key>com.github.rtrouton.munki.microsoftpowerpoint365</key>
+                <dict>
+                    <key>git_hash</key>
+                    <string>7b4ea11de87e21791c46bb23d3fe16677533a772</string>
+                    <key>path</key>
+                    <string>~/Library/AutoPkg/RecipeRepos/com.github.autopkg.rtrouton-recipes/MicrosoftPowerPoint365/MicrosoftPowerpoint365.munki.recipe</string>
+                    <key>sha256_hash</key>
+                    <string>eb3e08ea9e8a561bdaffac85f291fd81a76bda7f4a8d070e757040b7426a1f4f</string>
+                </dict>
+            </dict>
+        </dict>
+    </dict>
+</plist>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Identifier</key>
+    <string>{{ item.identifier }}</string>
+    <key>Input</key>
+    <dict>
+{% if item.app_destination is defined %}
+        <key>APP_DESTINATION</key>
+        <string>{{ item.app_destination }}</string>
+{% endif %}
+{% if item.disable_code_signature_verification is defined %}
+        <key>DISABLE_CODE_SIGNATURE_VERIFICATION</key>
+        <string>{{ item.disable_code_signature_verification }}</string>
+{% endif %}
+        <key>DISPLAY_NAME</key>
+        <string>{{ item.display_name | default(NAME)}}</string>
+{% if item.download_url is defined %}
+        <key>DOWNLOAD_URL</key>
+        <string>{{ item.download_url }}</string>
+{% endif %}
+{% if item.include_prereleases is defined %}
+        <key>INCLUDE_PRERELEASES</key>
+        <string>{{ item.include_prereleases }}</string>
+{% endif %}
+        <key>LOCALE</key>
+        <string>{{ item.locale | default("en-US")}}</string>
+        <key>LANGUAGE</key>
+        <string>{{ item.language | default("en-US")}}</string>
+{% if item.makepkginfo_pkgname is defined %}
+    <key>MAKEPKGINFO_PKGNAME</key>
+        <string>{{ item.makepkginfo_pkgname }}</string>
+{% endif %}
+{% if item.munkitools_admin_description is defined %}
+        <key>MUNKITOOLS_ADMIN_DESCRIPTION</key>
+        <string>{{ item.munkitools_admin_description }}</string>
+{% endif %}
+{% if item.munkitools_admin_displayname is defined %}
+        <key>MUNKITOOLS_ADMIN_DISPLAYNAME</key>
+        <string>{{ item.munkitools_admin_displayname }}</string>
+{% endif %}
+{% if item.munkitools_admin_name is defined %}
+        <key>MUNKITOOLS_ADMIN_NAME</key>
+        <string>{{ item.munkitools_admin_name }}</string>
+{% endif %}
+{% if item.munkitools_app_description is defined %}
+        <key>MUNKITOOLS_APP_DESCRIPTION</key>
+        <string>{{ item.munkitools_app_description }}</string>
+{% endif %}
+{% if item.munkitools_app_displayname is defined %}
+        <key>MUNKITOOLS_APP_DISPLAYNAME</key>
+        <string>{{ item.munkitools_app_displayname }}</string>
+{% endif %}
+{% if item.munkitools_app_name is defined %}
+        <key>MUNKITOOLS_APP_NAME</key>
+        <string>{{ item.munkitools_app_name }}</string>
+{% endif %}
+{% if item.munkitools_app_usage_description is defined %}
+        <key>MUNKITOOLS_APP_USAGE_DESCRIPTION</key>
+        <string>{{ item.munkitools_app_usage_description }}</string>
+{% endif %}
+{% if item.munkitools_app_usage_displayname is defined %}
+        <key>MUNKITOOLS_APP_USAGE_DISPLAYNAME</key>
+        <string>{{ item.munkitools_app_usage_displayname }}</string>
+{% endif %}
+{% if item.munkitools_app_usage_name is defined %}
+        <key>MUNKITOOLS_APP_USAGE_NAME</key>
+        <string>{{ item.munkitools_app_usage_name }}</string>
+{% endif %}
+{% if item.munkitools_core_description is defined %}
+        <key>MUNKITOOLS_CORE_DESCRIPTION</key>
+        <string>{{ item.munkitools_core_description }}</string>
+{% endif %}
+{% if item.munkitools_core_displayname is defined %}
+        <key>MUNKITOOLS_CORE_DISPLAYNAME</key>
+        <string>{{ item.munkitools_core_displayname }}</string>
+{% endif %}
+{% if item.munkitools_core_name is defined %}
+        <key>MUNKITOOLS_CORE_NAME</key>
+        <string>{{ item.munkitools_core_name }}</string>
+{% endif %}
+{% if item.munkitools_launchd_description is defined %}
+        <key>MUNKITOOLS_LAUNCHD_DESCRIPTION</key>
+        <string>{{ item.munkitools_launchd_description }}</string>
+{% endif %}
+{% if item.munkitools_launchd_displayname is defined %}
+        <key>MUNKITOOLS_LAUNCHD_DISPLAYNAME</key>
+        <string>{{ item.munkitools_launchd_displayname }}</string>
+{% endif %}
+{% if item.munkitools_launchd_name is defined %}
+        <key>MUNKITOOLS_LAUNCHD_NAME</key>
+        <string>{{ item.munkitools_launchd_name }}</string>
+{% endif %}
+{% if item.munkitools_python_description is defined %}
+        <key>MUNKITOOLS_PYTHON_DESCRIPTION</key>
+        <string>{{ item.munkitools_python_description }}</string>
+{% endif %}
+{% if item.munkitools_python_displayname is defined %}
+        <key>MUNKITOOLS_PYTHON_DISPLAYNAME</key>
+        <string>{{ item.munkitools_python_displayname }}</string>
+{% endif %}
+{% if item.munkitools_python_name is defined %}
+        <key>MUNKITOOLS_PYTHON_NAME</key>
+        <string>{{ item.munkitools_python_name }}</string>
+{% endif %}
+{% if item.category is defined %}
+        <key>MUNKI_CATEGORY</key>
+        <string>{{ item.category }}</string>
+{% endif %}
+        <key>MUNKI_DESCRIPTION</key>
+        <string>{{ item.description }}.</string>
+        <key>MUNKI_DEVELOPER</key>
+        <string>{{ item.developer }}</string>
+        <key>MUNKI_ICON</key>
+        <string>{{ item.munki_icon | default("")}}</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>{{ item.munki_repo_subdir | default(NAME)}}</string>
+        <key>NAME</key>
+        <string>{{ item.name }}</string>
+{% if item.release is defined %}
+        <key>RELEASE</key>
+        <string>{{ item.release }}</string>
+{% endif %}
+{% if item.sparkle_feed_url is defined %}
+        <key>SPARKLE_FEED_URL</key>
+        <string>{{ item.sparkle_feed_url }}</string>
+{% endif %}
+{% if item.extra_input_keys is defined %}
+{% for extra in item.extra_input_keys %}
+{% for key in extra %}
+        <key>{{ key }}</key>
+        <string>{{ extra[key] }}</string>
+{% endfor %}
+{% endfor %}
+{% endif %}
+        <key>pkginfo</key>
+        <dict>
+{% if item.blocking_applications is defined %}
+            <key>blocking_applications</key>
+            <array>
+{% for blocker in item.blocking_applications %}
+                <string>{{ blocker }}</string>
+{% endfor %}
+            </array>
+{% endif %}
+            <key>catalogs</key>
+            <array>
+{% if item.catalogs is iterable %}
+{% for catalog in item.catalogs %}
+                <string>{{ catalog }}</string>
+{% endfor %}
+{% else %}
+                <string>{{ catalogs }}</string>
+{% endif %}
+            </array>
+{% if item.category is defined %}
+            <key>category</key>
+            <string>%MUNKI_CATEGORY%</string>
+{% endif %}
+            <key>description</key>
+            <string>%MUNKI_DESCRIPTION%</string>
+            <key>developer</key>
+            <string>%MUNKI_DEVELOPER%</string>
+            <key>display_name</key>
+            <string>%DISPLAY_NAME%</string>
+            <key>name</key>
+            <string>%NAME%</string>
+{% if item.minimum_os_version is defined %}
+            <key>minimum_os_version</key>
+            <string>{{ item.minimum_os_version }}</string>
+{% endif %}
+{% if item.maximum_os_version is defined %}
+            <key>maximum_os_version</key>
+            <string>{{ item.maximum_os_version }}</string>
+{% endif %}
+            <key>unattended_install</key>
+            <{{ item.unattended_install | default("true") | lower }}/>
+            <key>unattended_uninstall</key>
+            <{{ item.unattended_uninstall | default("true") | lower }}/>
+{% if item.preinstall_script is defined %}
+            <key>preinstall_script</key>
+            <string>{{ item.preinstall_script }}
+            </string>
+{% endif %}
+{% if item.postinstall_script is defined %}
+            <key>postinstall_script</key>
+            <string>{{ item.postinstall_script }}
+            </string>
+{% endif %}
+{% if item.postuninstall_script is defined %}
+            <key>postuninstall_script</key>
+            <string>{{ item.postuninstall_script }}
+            </string>
+{% endif %}
+        </dict>
+    </dict>
+{% if autopkgr_MinimumVersion is defined %}
+    <key>MinimumVersion</key>
+    <string>{{ autopkgr_MinimumVersion }}</string>
+{% endif %}
+    <key>ParentRecipe</key>
+    <string>{{ item.parent_recipe }}</string>
+    <key>ParentRecipeTrustInfo</key>
+    <dict>
+        <key>non_core_processors</key>
+{% if item.non_core_processors is defined %}
+{% if item.non_core_processors | length > 0 %}
+        <dict>
+{% for non_core_processor in item.non_core_processors %}
+            <key>{{ non_core_processor.name }}</key>
+            <dict>
+                <key>git_hash</key>
+                <string>{{ non_core_processor.git_hash }}</string>
+                <key>path</key>
+                <string>{{ non_core_processor.path }}</string>
+                <key>sha256_hash</key>
+                <string>{{ non_core_processor.sha256_hash }}</string>
+            </dict>
+{% endfor %}
+        </dict>
+{% else %}
+        <dict/>
+{% endif %}
+{% endif %}
+        <key>parent_recipes</key>
+{% if item.parent_recipes is defined %}
+        <dict>
+{% for parent_recipe in item.parent_recipes %}
+            <key>{{ parent_recipe.name }}</key>
+            <dict>
+                <key>git_hash</key>
+                <string>{{ parent_recipe.git_hash }}</string>
+                <key>path</key>
+                <string>{{ parent_recipe.path }}</string>
+                <key>sha256_hash</key>
+                <string>{{ parent_recipe.sha256_hash }}</string>
+            </dict>
+{% endfor %}
+{% endif %}
+        </dict>
+    </dict>
+</dict>
+</plist>

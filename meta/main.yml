@@ -1,0 +1,27 @@
+---
+dependencies: []
+galaxy_info:
+  author: Corey Ramirez-Gomez
+  role_name: autopkgr
+  description: Install and configure autopkgr and munki. Run recipes and deploy packages to munki repo.
+  license: MIT
+  min_ansible_version: 2.1
+  platforms:
+    - name: macOS
+      versions:
+        - Monterey
+        - Big-Sur
+        - Catalina
+        - Mojave
+        - High-Sierra
+        - Sierra
+  galaxy_tags:
+    - macos
+    - autopkg
+    - autopkgr
+    - munki
+    - packages
+    - package_management
+    - osx
+    - apple
+    - mdm
