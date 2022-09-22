@@ -1,9 +1,11 @@
 ---
-- name: autopkgr/tasks/configure - Ensure AutoPkg and Munki Directories Exist
+- name: "Ensure AutoPkg and Munki Directories Exist"
   file:
     state: directory
     path: "{{ item }}"
     owner: "{{ autopkgr_user }}"
+    group: "{{ autopkgr_group }}"
+    mode: 0774
   with_items:
     - "{{ autopkgr_remote_base_path }}"
     - "{{ autopkgr_recipe_override_dir }}"
@@ -16,7 +18,7 @@
     - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}"
     - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/templates"
     - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/resources"
-- name: autopkgr/tasks/configure - Gather Post Processor Repos
+- name: "Gather Post Processor Repos"
   set_fact:
     autopkgr_recipe_repos: |-
       {% set r = autopkgr_recipe_repos %}
@@ -28,7 +30,7 @@
       {{ r }}
   with_items:
     - "{{ autopkgr_post_processors }}"
-- name: autopkgr/tasks/configure - Build Post Processor Command
+- name: "Build Post Processor Command"
   set_fact:
     autopkgr_post_processor_commands: |
       {% set r = autopkgr_post_processor_commands %}
@@ -40,7 +42,7 @@
       {{ r | trim | replace('\n', '') }}
   with_items:
     - "{{ autopkgr_post_processors }}"
-- name: autopkgr/tasks/configure - Apply Munki Configuration Keys
+- name: "Apply Munki Configuration Keys"
   osx_defaults:
     domain: com.googlecode.munki.munkiimport
     key: "{{ item.name }}"
@@ -48,8 +50,8 @@
     type: "{{ item.type }}"
     state: present
   with_items:
-    - "{{ autopkgr_munki_configuration }}"
-- name: autopkgr/tasks/configure - Apply AutoPkg Configuration Keys
+    - "{{ autopkgr_builtin_munki_configuration + autopkgr_munki_configuration }}"
+- name: "Apply AutoPkg Configuration Keys"
   osx_defaults:
     domain: com.github.autopkg
     key: "{{ item.name }}"
@@ -57,19 +59,30 @@
     type: "{{ item.type }}"
     state: present
   with_items:
-    - "{{ autopkgr_autopkg_configuration }}"
-- name: autopkgr/tasks/configure - Add + Update Recipe Repos
+    - "{{ autopkgr_builtin_autopkg_configuration + autopkgr_autopkg_configuration }}"
+- name: "Add + Update Recipe Repos"
   command: "{{ autopkgr_bin_autopkg }} repo-add {{ item }}"
+  register: repo_add_results
+  changed_when:
+    - "'Already up to date.' not in repo_add_results.stdout"
+    - "'to RECIPE_SEARCH_DIRS...' in repo_add_results.stdout"
   with_items:
     - "{{ autopkgr_recipe_repos }}"
-- name: autopkgr/tasks/configure - Deploy Recipe Overrides
+- name: "Deploy Recipe Overrides"
   copy:
-    src: "overrides/active/{{ item }}"
-    dest: "{{ autopkgr_recipe_override_dir }}/"
-    owner: "{{ ansible_user_id }}"
-    mode: "0644"
+    src: "{{ item }}"
+    dest: "{{ autopkgr_recipe_override_dir }}/{{ item | basename }}"
+    owner: "{{ autopkgr_user }}"
+    group: "{{ autopkgr_group }}"
+    mode: 0644
   with_items: "{{ autopkgr_override_files }}"
-- name: autopkgr/tasks/configure - update-trust-info for Recipe Overrides
-  command: "{{ autopkgr_bin_autopkg }} update-trust-info {{ autopkgr_recipe_override_dir }}/{{ item }}"
+- name: "update-trust-info for Recipe Overrides"
+  command: "{{ autopkgr_bin_autopkg }} update-trust-info {{ autopkgr_recipe_override_dir }}/{{ item | basename }}"
+  async: 30
+  poll: 5
+  register: update_trust_results
+  failed_when:
+    - "'t find a recipe for' in update_trust_results.stdout" # Note: this is such a hack. Searching for phrase "Didn't find a recipe for", but the apostrophe is problematic.
+  # changed_when:
   with_items: "{{ autopkgr_override_files }}"
   when: "{{ autopkgr_update_trust_info }}"

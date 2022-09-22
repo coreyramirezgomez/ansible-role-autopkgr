@@ -1,44 +1,48 @@
 ---
-- name: autopkgr/tasks/build - Run autopkg
-  command: "{{ autopkgr_bin_autopkg }} run -v {{ autopkgr_post_processor_commands }} {{ autopkgr_recipe_override_dir }}/{{ item }}"
+- name: "Run autopkg"
+  command: "{{ autopkgr_bin_autopkg }} run -v {{ autopkgr_post_processor_commands }} {{ autopkgr_recipe_override_dir }}/{{ item | basename }}"
   async: 600
   poll: 30
   with_items: "{{ autopkgr_override_files }}"
-- name: autopkgr/tasks/build - Run makecatalogs
+  register: autopkg_run_results
+  changed_when: "'The following new items were imported into' in autopkg_run_results.stdout"
+- name: "Run makecatalogs"
   async: 600
   poll: 30
   command: "{{ autopkgr_bin_makecatalogs }} {{ autopkgr_munki_repo }}"
-- name: autopkgr/tasks/build - Extract icons
+  # changed_when:
+- name: "Extract icons"
   async: 600
   poll: 30
   command: "{{ autopkgr_bin_iconimporter }} {{ autopkgr_munki_repo }}"
-- name: autopkgr/tasks/build - Generate Client Resources
+  # changed_when:
+- name: "Generate Client Resources"
   template:
     src: "{{ item }}"
-    dest: "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/templates/{{ item | replace('.j2', '')}}"
+    dest: "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/templates/{{ item | replace('.j2', '') }}"
     mode: 0644
   with_items:
     - "footer_template.html.j2"
     - "showcase_template.html.j2"
     - "sidebar_template.html.j2"
-- name: autopkgr/tasks/build - Copy over Client Resources Files
+- name: "Copy over Client Resources Files"
   copy:
-    src: "{{ item }}"
-    dest: "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/resources/"
+    src: "{{ item | basename }}"
+    dest: "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/resources/{{ item | basename }}"
     mode: "0644"
   with_items: "{{ autopkgr_client_resources_files }}"
-- name: autopkg/tasks/build - Package Client Resources
+- name: "Package Client Resources"
   archive:
     path:
       - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/resources"
       - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/templates"
     dest: "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}.zip"
     format: zip
-    remove: yes
+    remove: true
     mode: 0644
     exclude_path:
       - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}"
-- name: autopkgr/tasks/build - Cleanup Client Resources Directory
+- name: "Cleanup Client Resources Directory"
   file:
     state: absent
     path: "{{ item }}"

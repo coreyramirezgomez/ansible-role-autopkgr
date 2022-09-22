@@ -1,5 +1,4 @@
 """munki_lander.py file contents."""
-import argparse
 import json
 import os
 import subprocess

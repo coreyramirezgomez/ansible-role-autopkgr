@@ -1,16 +1,21 @@
 ---
-- name: autopkgr/tasks/install - Download Munki
-  include_tasks: "download.yml"
-  with_dict:
-    - "munki":
-        "github_url": "https://api.github.com/repos/munki/munki/releases"
-        "asset_filetype": ".pkg"
-        "release_version": "latest"
-    - "autopkgr":
-        "github_url": "https://api.github.com/repos/autopkg/autopkg/releases"
-        "asset_filetype": ".pkg"
-        "release_version": "latest"
-- name: autopkgr/tasks/install - Install Packages
-  command: "{{ autopkgr_bin_installer }} -pkg {{ item }} -target /"
+- name: "Download Munki"
+  include_role:
+    name: "coreyramirezgomez.github_release_retriever"
+  vars:
+    github_release_retriever_project: "munki/munki"
+    github_release_retriever_version: "{{ autopkgr_munki_install_version }}"
+    github_release_retriever_filetype: ".pkg"
+- name: "Download autopkg"
+  include_role:
+    name: "coreyramirezgomez.github_release_retriever"
+  vars:
+    github_release_retriever_project: "autopkg/autopkg"
+    github_release_retriever_version: "{{ autopkgr_autopkg_install_version }}"
+    github_release_retriever_filetype: ".pkg"
+- name: "Install autopkg and munki"
+  command: "{{ autopkgr_bin_installer }} -pkg {{ item.dest }} -target /"
   become: true
-  with_items: "{{ downloads }}"
+  register: results
+  changed_when: "'installer: The install was successful.' in results.stdout or 'installer: The upgrade was successful.' in results.stdout"
+  with_items: "{{ github_release_retriever_downloads.results }}"

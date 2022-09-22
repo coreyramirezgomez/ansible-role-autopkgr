@@ -1,32 +1,21 @@
 ---
 # tasks file for autopkgr
+- name: "Debug"
+  include_tasks:
+    file: debug.yml
+  when: "'debug' in autopkgr_actions"
 - name: assert that os_family is supported
   assert:
     that: ansible_distribution in ['MacOSX']
-- name: autopkgr/tasks/main - Install Dependencies
+- name: "Install Dependencies"
   include_tasks:
     file: install.yml
-    apply:
-      tags:
-        - install
   when: "'install' in autopkgr_actions"
-  tags:
-    - install
-- name: autopkgr/tasks/main - Configure Host
+- name: "Configure Host"
   include_tasks:
     file: configure.yml
-    apply:
-      tags:
-        - configure
   when: "'configure' in autopkgr_actions"
-  tags:
-    - configure
-- name: autopkgr/tasks/main - Build Packages
+- name: "Build Packages"
   include_tasks:
-    file:  build.yml
-    apply:
-      tags:
-        - build
+    file: build.yml
   when: "'build' in autopkgr_actions"
-  tags:
-    - build
