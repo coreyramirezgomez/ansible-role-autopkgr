@@ -11,11 +11,33 @@ autopkgr_munki_install_version: "latest"
 autopkgr_user: "{{ ansible_user_id }}"
 autopkgr_group: "{{ ansible_user_gid }}"
 autopkgr_remote_base_path: "{{ ansible_user_dir }}/coreyramirezgomez.autopkgr"
-autopkgr_munki_repo: "file://{{ autopkgr_remote_base_path }}/munki/repo"
+autopkgr_munki_repo_type: "file://"
+autopkgr_munki_repo_path: "{{ autopkgr_remote_base_path }}/munki/repo"
 autopkgr_munki_pkginfo_extension: ".plist"
 autopkgr_munki_default_catalog: "test"
 autopkgr_recipe_override_dir: "{{ autopkgr_remote_base_path }}/autopkgr/overrides"
 autopkgr_recipe_repos: []
+autopkgr_override_files_copy: {}
+  # "override.file1.recipe":
+  #   content: |
+  #     PLIST CONTENT
+  #   dest: "{{ autopkgr_recipe_override_dir }}/override.file1.recipe"
+  #   owner: "{{ autopkgr_user }}"
+  #   group: "{{ autopkgr_group }}"
+  #   mode: 0644
+  # "override.file2.recipe":
+  #   src: "overrides/override.file2.recipe"
+  #   dest: "{{ autopkgr_recipe_override_dir }}/override.file2.recipe"
+  #   owner: "{{ autopkgr_user }}"
+  #   group: "{{ autopkgr_group }}"
+  #   mode: 0644
+  # "override.file3.recipe":
+  #   src: "remote_overrides/override.file3.recipe"
+  #   dest: "{{ autopkgr_recipe_override_dir }}/override.file3.recipe"
+  #   owner: "{{ autopkgr_user }}"
+  #   group: "{{ autopkgr_group }}"
+  #   mode: 0644
+  #   remote_src: true
 autopkgr_override_files: []
 autopkgr_update_trust_info: true
 autopkgr_fail_recipes_without_trust: false

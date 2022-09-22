@@ -9,15 +9,15 @@
   with_items:
     - "{{ autopkgr_remote_base_path }}"
     - "{{ autopkgr_recipe_override_dir }}"
-    - "{{ autopkgr_munki_repo }}"
-    - "{{ autopkgr_munki_repo }}/pkgs"
-    - "{{ autopkgr_munki_repo }}/pkgsinfo"
-    - "{{ autopkgr_munki_repo }}/catalogs"
-    - "{{ autopkgr_munki_repo }}/icons"
-    - "{{ autopkgr_munki_repo }}/client_resources"
-    - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}"
-    - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/templates"
-    - "{{ autopkgr_munki_repo }}/client_resources/{{ autopkgr_client_resources_name }}/resources"
+    - "{{ autopkgr_munki_repo_path }}"
+    - "{{ autopkgr_munki_repo_path }}/pkgs"
+    - "{{ autopkgr_munki_repo_path }}/pkgsinfo"
+    - "{{ autopkgr_munki_repo_path }}/catalogs"
+    - "{{ autopkgr_munki_repo_path }}/icons"
+    - "{{ autopkgr_munki_repo_path }}/client_resources"
+    - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}"
+    - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/templates"
+    - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/resources"
 - name: "Gather Post Processor Repos"
   set_fact:
     autopkgr_recipe_repos: |-
@@ -69,15 +69,21 @@
   with_items:
     - "{{ autopkgr_recipe_repos }}"
 - name: "Deploy Recipe Overrides"
-  copy:
-    src: "{{ item }}"
-    dest: "{{ autopkgr_recipe_override_dir }}/{{ item | basename }}"
-    owner: "{{ autopkgr_user }}"
-    group: "{{ autopkgr_group }}"
-    mode: 0644
-  with_items: "{{ autopkgr_override_files }}"
+  copy: "{{ item }}"
+  with_dict: "{{ autopkgr_override_files_copy }}"
+- name: "Update autopkgr_override_files list"
+  set_fact:
+    autopkgr_override_files: |
+      {% set original = autopkgr_override_files %}
+      {% set new = [] %}
+      {% for r in autopkgr_override_files_copy %}
+        {% if r.dest | basename not in original %}
+          {% set new.append(r.dest | basename) %}
+        {% endif %}
+      {% endfor %}
+      {{ original + new }}
 - name: "update-trust-info for Recipe Overrides"
-  command: "{{ autopkgr_bin_autopkg }} update-trust-info {{ autopkgr_recipe_override_dir }}/{{ item | basename }}"
+  command: "{{ autopkgr_bin_autopkg }} update-trust-info {{ autopkgr_recipe_override_dir }}/{{ item }}"
   async: 30
   poll: 5
   register: update_trust_results
