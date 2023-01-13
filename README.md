@@ -114,7 +114,7 @@ autopkgr_client_resources_files:
 ```
     - hosts: macos
       roles:
-        - role: coreyramirezgomez.autopkgr
+        - role: crg.autopkgr
           autopkgr_actions:
             - install
             - configure
@@ -125,7 +125,7 @@ autopkgr_client_resources_files:
             - name: "Slack"
               repo: "https://github.com/coreyramirezgomez/autopkg-recipes.git"
               enabled: true
-              command: "com.github.coreyramirezgomez.autopkg-recipes.postprocessors/Slacker"
+              command: "com.github.crg.autopkg-recipes.postprocessors/Slacker"
               configuration: # All of these are required in order to work.
                 - name: "webhook_url"
                   type: "string"

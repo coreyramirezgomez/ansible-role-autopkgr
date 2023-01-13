@@ -10,7 +10,7 @@ autopkgr_autopkg_install_version: "latest"
 autopkgr_munki_install_version: "latest"
 autopkgr_user: "{{ ansible_user_id }}"
 autopkgr_group: "{{ ansible_user_gid }}"
-autopkgr_remote_base_path: "{{ ansible_user_dir }}/coreyramirezgomez.autopkgr"
+autopkgr_remote_base_path: "{{ ansible_user_dir }}/crg.autopkgr"
 autopkgr_munki_repo_type: "file://"
 autopkgr_munki_repo_path: "{{ autopkgr_remote_base_path }}/munki/repo"
 autopkgr_munki_pkginfo_extension: ".plist"
@@ -60,7 +60,7 @@ autopkgr_post_processors: []
   # - name: "Slack"
   #   repo: "https://github.com/coreyramirezgomez/autopkg-recipes.git"
   #   enabled: false
-  #   command: "com.github.coreyramirezgomez.autopkg-recipes.postprocessors/Slacker"
+  #   command: "com.github.crg.autopkg-recipes.postprocessors/Slacker"
   #   configuration: # All of these are required in order to work.
   #     - name: "webhook_url"
   #       type: "string"
