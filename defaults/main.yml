@@ -5,18 +5,31 @@ autopkgr_actions:
   - "install"
   - "configure"
   - "build"
-# Required
+## Environment handling; required
 autopkgr_autopkg_install_version: "latest"
 autopkgr_munki_install_version: "latest"
 autopkgr_user: "{{ ansible_user_id }}"
 autopkgr_group: "{{ ansible_user_gid }}"
+autopkgr_mode: 0774
+# Path to store all files for this deployment.
 autopkgr_remote_base_path: "{{ ansible_user_dir }}/crg.autopkgr"
+# If local path on remote host, it should start with 'file://'
 autopkgr_munki_repo_type: "file://"
 autopkgr_munki_repo_path: "{{ autopkgr_remote_base_path }}/munki/repo"
 autopkgr_munki_pkginfo_extension: ".plist"
 autopkgr_munki_default_catalog: "test"
 autopkgr_recipe_override_dir: "{{ autopkgr_remote_base_path }}/autopkgr/overrides"
+# define recipe repos to clone/update.
 autopkgr_recipe_repos: []
+
+## Override Handling; required
+# NOTE: autopkgr_override_files is re-used to collect the names of the
+#       overrides to process. This will allow for mixing/matching of
+#       deployed overrides (defined in autopkgr_override_files_copy) and
+#       existing overrides (defined in autopkgr_override_files).
+# NOTE: When processing overrides from autopkgr_override_files, the file is
+#       assumed to exist at autopkgr_recipe_override_dir.
+# define override files to deploy; either as inline content or a local file (see example).
 autopkgr_override_files_copy: {}
   # "override.file1.recipe":
   #   content: |
@@ -38,8 +51,11 @@ autopkgr_override_files_copy: {}
   #   group: "{{ autopkgr_group }}"
   #   mode: 0644
   #   remote_src: true
+# define names of the override files that already exist on remote host.
 autopkgr_override_files: []
+# Apply trust to overrides.
 autopkgr_update_trust_info: true
+# Override the autopkg run trust behaviour.
 autopkgr_fail_recipes_without_trust: false
 
 ## Custom munki configuration
@@ -87,7 +103,11 @@ autopkgr_post_processors: []
   #       type: "int"
   #       value: 15
 
+autopkgr_extract_icons: false
 # autopkgr_MinimumVersion: "" # minimum version of autopkg to use for recipes.
+## Resources Handling; required
+# NOTE: These are all the defaults from a standard munki install
+autopkgr_generate_client_resources: false
 autopkgr_client_resources_name: "site_default"
 autopkgr_client_resources_footers:
   - href: "category-all.html"

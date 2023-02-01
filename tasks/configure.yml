@@ -3,9 +3,6 @@
   file:
     state: directory
     path: "{{ item }}"
-    owner: "{{ autopkgr_user }}"
-    group: "{{ autopkgr_group }}"
-    mode: 0774
   with_items:
     - "{{ autopkgr_remote_base_path }}"
     - "{{ autopkgr_recipe_override_dir }}"
@@ -69,19 +66,11 @@
   with_items:
     - "{{ autopkgr_recipe_repos }}"
 - name: "Deploy Recipe Overrides"
-  copy: "{{ item }}"
+  copy: "{{ item.value }}"
   with_dict: "{{ autopkgr_override_files_copy }}"
 - name: "Update autopkgr_override_files list"
   set_fact:
-    autopkgr_override_files: |
-      {% set original = autopkgr_override_files %}
-      {% set new = [] %}
-      {% for r in autopkgr_override_files_copy %}
-        {% if r.dest | basename not in original %}
-          {% set new.append(r.dest | basename) %}
-        {% endif %}
-      {% endfor %}
-      {{ original + new }}
+    autopkgr_override_files: "{{ (autopkgr_override_files + (autopkgr_override_files_copy.keys() | list)) | unique }}"
 - name: "update-trust-info for Recipe Overrides"
   command: "{{ autopkgr_bin_autopkg }} update-trust-info {{ autopkgr_recipe_override_dir }}/{{ item }}"
   async: 30

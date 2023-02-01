@@ -16,35 +16,39 @@
   poll: 30
   command: "{{ autopkgr_bin_iconimporter }} {{ autopkgr_munki_repo_path }}"
   # changed_when:
+  when: autopkgr_extract_icons
 - name: "Generate Client Resources"
-  template:
-    src: "{{ item }}"
-    dest: "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/templates/{{ item | replace('.j2', '') }}"
-    mode: 0644
-  with_items:
-    - "footer_template.html.j2"
-    - "showcase_template.html.j2"
-    - "sidebar_template.html.j2"
-- name: "Copy over Client Resources Files"
-  copy:
-    src: "{{ item | basename }}"
-    dest: "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/resources/{{ item | basename }}"
-    mode: "0644"
-  with_items: "{{ autopkgr_client_resources_files }}"
-- name: "Package Client Resources"
-  archive:
-    path:
-      - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/resources"
-      - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/templates"
-    dest: "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}.zip"
-    format: zip
-    remove: true
-    mode: 0644
-    exclude_path:
-      - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}"
-- name: "Cleanup Client Resources Directory"
-  file:
-    state: absent
-    path: "{{ item }}"
-  with_items:
-    - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}"
+  when: autopkgr_generate_client_resources
+  block:
+    - name: "Deploy Templated Client Resources"
+      template:
+        src: "{{ item }}"
+        dest: "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/templates/{{ item | replace('.j2', '') }}"
+        mode: 0644
+      with_items:
+        - "footer_template.html.j2"
+        - "showcase_template.html.j2"
+        - "sidebar_template.html.j2"
+    - name: "Copy over Client Resources Files"
+      copy:
+        src: "{{ item | basename }}"
+        dest: "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/resources/{{ item | basename }}"
+        mode: "0644"
+      with_items: "{{ autopkgr_client_resources_files }}"
+    - name: "Package Client Resources"
+      archive:
+        path:
+          - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/resources"
+          - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}/templates"
+        dest: "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}.zip"
+        format: zip
+        remove: true
+        mode: 0644
+        exclude_path:
+          - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}"
+    - name: "Cleanup Client Resources Directory"
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - "{{ autopkgr_munki_repo_path }}/client_resources/{{ autopkgr_client_resources_name }}"
