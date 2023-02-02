@@ -11,7 +11,7 @@ autopkgr_builtin_autopkg_configuration:
     value: "{{ autopkgr_fail_recipes_without_trust | default('true', true) }}"
   - name: "MUNKI_REPO"
     type: "string"
-    value: "{{ autopkgr_munki_repo_type }}{{ autopkgr_munki_repo_path }}"
+    value: "{{ autopkgr_munki_repo_path }}"
   - name: "RECIPE_OVERRIDE_DIRS"
     type: "string"
     value: "{{ autopkgr_recipe_override_dir }}"
