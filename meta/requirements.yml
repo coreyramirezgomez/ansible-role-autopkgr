@@ -1,2 +1,1 @@
-roles:
-  - src: coreyramirezgomez.github_release_retriever
+- src: coreyramirezgomez.github_release_retriever
